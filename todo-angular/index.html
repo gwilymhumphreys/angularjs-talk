@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app="todo">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AngularJS • TodoMVC</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
+</head>
+<body class="container">
+
+<section ng-controller="OtherControllerThatDoesntExist" class="row">
+</section>
+
+<section ng-controller="TodoCtrl" class="row">
+
+    <header class="span12 hero-unit">
+      <h1>todos</h1>
+      <form id="todo-form" ng-submit="addTodo()">
+        <input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus type="text">
+        <button class="btn btn-primary">Add</button>
+      </form>
+    </header>
+
+    <section class="span12" ng-show="todos.length">
+      <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="todo-list">
+        <li ng-repeat="todo in todos"
+            ng-class="{ completed: todo.completed, editing: todo == editedTodo }">
+          <div class="view">
+            <input class="toggle" type="checkbox" ng-model="todo.completed">
+            <label ng-dblclick="editTodo(todo)" ng-class="{ strike: todo.completed }">{{todo.title}}</label>
+            <button class="destroy btn btn-danger btn-small" ng-click="removeTodo(todo)">Delete</button>
+          </div>
+          <form ng-submit="doneEditing(todo)" ng-show="todo == editedTodo">
+            <input class="edit" ng-model="todo.title" type="text">
+            <button class="btn btn-primary">Save</button>
+          </form>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="span12" ng-show="todos.length">
+      <span id="todo-count"><strong>{{ remainingCount }}</strong>
+        <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+      </span>
+      <br>
+      <button class="btn btn-danger btn-small" ng-click="clearDoneTodos()" ng-show="doneCount">Delete completed ({{ doneCount }})
+      </button>
+    </footer>
+  </section>
+
+  <script src="js/libs/angular/angular.min.js"></script>
+  <script src="js/controllers/todoCtrl.js"></script>
+  <script src="js/services/todoStorage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

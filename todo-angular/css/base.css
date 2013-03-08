@@ -1,0 +1,39 @@
+
+
+.hidden{
+  display:none;
+}
+
+ul li {
+  list-style: none;
+}
+
+#todo-form {
+  margin-top: 40px;
+}
+
+.span12 input[type=text],
+.span12 input[type=checkbox] {
+  margin: 0;
+}
+
+.span12 label {
+  display: inline;
+}
+
+.view {
+  width: 300px;
+  height: 50px;
+}
+
+.view .destroy {
+  float: right;
+}
+
+#todo-list {
+  margin-top: 20px;
+}
+
+.strike {
+  text-decoration: line-through;
+}
